@@ -1,0 +1,21 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "start"]
+
+# Because this file has an abnormal name (not just Dockerfile), we need
+# to run the build command like this:
+# docker build -f Dockerfile.dev .
+
+# To run the docker image, use the following command:
+# docker run -it -p 3000:3000 CONTAINER_ID
+
+# We are going to setup docker volumes
+# The command to setup a docekr volume is as follows:
+# docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app <image_id>
