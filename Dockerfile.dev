@@ -11,7 +11,7 @@ CMD ["npm", "run", "start"]
 
 # Because this file has an abnormal name (not just Dockerfile), we need
 # to run the build command like this:
-# docker build -f Dockerfile.dev .
+# docker build -t benjajansen/docker-react -f Dockerfile.dev .
 
 # To run the docker image, use the following command:
 # docker run -it -p 3000:3000 CONTAINER_ID

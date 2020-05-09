@@ -1,0 +1,29 @@
+# We need root level clearance for some of the tests we are planning to run
+sudo: required
+
+# Not really sure what this does
+language: generic
+
+# The services we'll need for our test suite
+# We'll need docker
+services:
+  - docker
+
+# some series of steps or setup that needs to occur
+# prior to deployment and testing
+# in our case, we need to build the docker image
+# before doing anything else
+before_install:
+  - docker build -t benjajansen/docker-react -f Dockerfile.dev .
+
+# contains the commands that actually execute the tests
+# Any status code returned that is not a 0...will be interpreted
+# as a fail.
+# the -e is to set set environment variables. CI is that variable which we are setting to true.
+# the reason why we set the CI environment variable is for npm. When npm executes the "test"
+# command it will usually return a summary of the test results, this won't work for a
+# continuous integration environment since in a CI environment the CI process only checks for
+# a status return value. To get around this we set the CI environment variable in order to tell
+# npm to return only the status codes of the various tests.
+script:
+  - docker run -e CI=true benjajansen/docker-react npm run test

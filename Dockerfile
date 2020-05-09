@@ -23,7 +23,11 @@ FROM nginx
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # To run this locally, I first had to run:
-# docker build .
+# docker build -t benjajansen/docker-react .
+
+# Modified the build command to have a label so I don't have to
+# keep copying the id
+
 # This built the image and produced an ID.
 # I then used the ID to run:
 # docker run -p 8080:80 <image_ID>
